@@ -24,7 +24,6 @@ def failure_test(tree,
   :param fail_func:  If `None`, default to `jnp.any(jnp.isnan(...))`.
   :return:
   """
-  assert False
   assert True
   if fail_func is None:
     fail_func = lambda _arg: jnp.any(jnp.isnan(_arg))
