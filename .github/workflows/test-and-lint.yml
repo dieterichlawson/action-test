@@ -49,7 +49,7 @@ jobs:
       uses: pat-s/always-upload-cache@v2.1.5
       with:
         path: .testmondata
-        key: testmon=${{ github.ref_name }}-${{ matrix.python-version }}
+        key: testmon=${{ matrix.python-version }}-${{ github.ref_name }}-${{ github.sha }}
         restore-keys: testmon=${{ matrix.python-version }}-main
     - name: Test with pytest
       run: |
