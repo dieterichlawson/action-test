@@ -29,6 +29,22 @@ jobs:
         python -m pip install --upgrade pip
         python -m pip install pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    - name: Install pyright and flake8
+      if: matrix.python-version == "3.9"
+      run: |
+        python -m pip install pyright flake8
+    - name: Lint with flake8
+      if: matrix.python-version == "3.9"
+      run: |
+        # stop the build if there are Python syntax errors or undefined names
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        # exit-zero treats all errors as warnings.
+        flake8 . --count --exit-zero --statistics --config=.flake8.ini0
+    - name: Typecheck with pyright
+      if: matrix.python-version == "3.9"
+      run: |
+        # Print the errors but don't fail the build.
+        pyright || true
     - name: Test with pytest
       run: |
         pytest
