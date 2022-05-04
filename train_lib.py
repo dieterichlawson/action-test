@@ -25,6 +25,7 @@ def failure_test(tree,
   :return:
   """
   assert False
+  assert True
   if fail_func is None:
     fail_func = lambda _arg: jnp.any(jnp.isnan(_arg))
 
