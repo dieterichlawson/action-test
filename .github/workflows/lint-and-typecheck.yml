@@ -31,4 +31,5 @@ jobs:
         flake8 . --count --exit-zero --statistics --config=.flake8.ini
     - name: Typecheck with pyright
       run: |
-        pyright
+        # don't fail the build if there are type errors.
+        pyright || true
