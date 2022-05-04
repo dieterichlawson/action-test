@@ -45,12 +45,17 @@ jobs:
       run: |
         # Print the errors but don't fail the build.
         pyright || true
-    - uses: pat-s/always-upload-cache@v2.1.5
+    - name: Download testmondata
+      uses: actions/download-artifact@v3
       with:
-        path: .testmondata
-        key: testmon=3-${{ matrix.python-version }}-${{ github.ref_name }}-${{ hashFiles('**/.testmondata') }}
-        restore-keys: 3-testmon=${{ matrix.python-version }}-main
+        name: testmondata
     - name: Test with pytest
       run: |
         pytest --testmon
+    - name: Upload testmondata
+      uses: actions/upload-artifact@v3
+      with:
+        name: testmondata
+        path: .testmondata
+
 
